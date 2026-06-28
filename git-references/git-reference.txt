@@ -68,7 +68,10 @@ Set branch to main:
   git branch -M main
 
 Add remot using SSH alias:
-  git remote add origin git@github-personal:Hurjay/your-project-name.git
+  git remote add origin git@alias:Username/your-project-name.git
+
+  Example:
+  git remote add origin git@github-personal:Nut/your-project-name.git
 
 Push:
   git push -u origin main
