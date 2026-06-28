@@ -1,0 +1,65 @@
+=== === === === === === === === === === === === === === === 
+2026May31
+installed Debian13 on SCSI2
+Lexar 120GB SSD
+=== === === === === === === === === === === === === === === 
+WiFi dongle not detected
+Proceeded to installation without network
+Base system installation only
+=== === === === === === === === === === === === === === === 
+Fixed apt sources list
+/etc/apt/sources.list.d/debian.list
+Contents of debian.list:
+   deb http://deb.debian.org/debian trixie main contrib non-free-firmware
+   deb http://deb.debian.org/debian trixie-updates main contrib non-free-firmware
+   deb http://security.debian.org/debian-security trixie-security main contrib non-free-firmware
+=== === === === === === === === === === === === === === === 
+Installed VSCODE
+$ su
+(provide root password)
+
+# apt update
+# apt upgrade
+
+Install prerequisites
+# apt install wget gpg apt-transport-https
+
+Import Microsoft's signing key:
+# wget -qO- https://packages.microsoft.com/keys/microsoft.asc \
+  | gpg --dearmor \
+  | sudo tee /usr/share/keyrings/microsoft.gpg > /dev/null
+  
+Add the repository:
+# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" \
+| sudo tee /etc/apt/sources.list.d/vscode.list
+
+Update package lists:
+# apt update
+
+Install VS Code:
+# apt install code
+
+
+
+=== === === === === === === === === === === === === === === 
+
+
+
+
+=== === === === === === === === === === === === === === === 
+
+
+
+
+
+=== === === === === === === === === === === === === === === 
+
+
+
+
+
+
+
+
+
+

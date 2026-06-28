@@ -1,0 +1,85 @@
+=== === === === === === === === === === === === === === === === === === === ===
+2026 SSH-based Git workflow
+=== === === === === === === === === === === === === === === === === === === ===
+SSH Multi-Account Git Setup on Linux (Debian 13)
+
+Generate SSH keys:
+  ssh-keygen -t ed25519 -C "personal_email@gmail.com" -f ~/.ssh/id_ed25519_personal
+  ssh-keygen -t ed25519 -C "work_email@gmail.com" -f ~/.ssh/id_ed25519_work
+  Press [Enter] to skip passphase.
+
+Add public keys to GitHub:
+  On bash run and copy the output:
+    cat ~/.ssh/id_ed25519_personal.pub
+    cat ~/.ssh/id_ed25519_work.pub
+
+  Go to github/settings/SSH and GPG keys
+    New SSH key then paste
+    Repeat this step for all the accounts
+
+Add kes to SSH agent:
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519_personal
+  ssh-add ~/.ssh/id_ed25519_work
+
+Configure: ~/.ssh/config
+  Content:
+  # Personal
+  Host github-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_personal
+
+  # Work
+  Host github-work
+    HostName github.com
+    User git
+  IdentityFile ~/.ssh/id_ed25519_work
+
+  Ctrk+O [enter]
+  Ctrl+X
+  chmod 600 ~/.ssh/config
+
+Verify connection:
+  ssh -T git@github-personal // Hi username! You've successfully authenticated...
+  ssh -T git@github-work // Hi username! You've successfully authenticated...
+=== === === === === === === === === === === === === === === === === === === ===
+Setting up Git with SSH key
+
+Create the repo on Github:
+  github.com
+  sign in
+  New repostirory
+
+Initialize locally:
+  mkdir project-name
+  cd project-name
+  git init
+
+Set local Git identity:
+  git config user.name "Your Name"
+  git config user.email "your_email@gmail.com"
+
+Add your files and commit:
+  git add .
+  git commit -m "Initial commit"
+
+Set branch to main:
+  git branch -M main
+
+Add remot using SSH alias:
+  git remote add origin git@github-personal:Hurjay/your-project-name.git
+
+Push:
+  git push -u origin main
+
+--- --- --- --- --- --- --- --- ---
+Standard Git push:
+  git add .
+  git commint -m "Your message"
+  git push
+
+=== === === === === === === === === === === === === === === === === === === ===
+
+=== === === === === === === === === === === === === === === === === === === ===
+=== === === === === === === === === === === === === === === === === === === ===
